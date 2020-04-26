@@ -4,6 +4,7 @@ import { LocalStrategy } from '@feathersjs/authentication-local';
 import { expressOauth } from '@feathersjs/authentication-oauth';
 
 import { Application } from './declarations';
+import CognitoStrategy from './CognitoStrategy';
 
 declare module './declarations' {
   interface ServiceTypes {
@@ -16,7 +17,9 @@ export default function(app: Application) {
 
   authentication.register('jwt', new JWTStrategy());
   authentication.register('local', new LocalStrategy());
+  authentication.register('cognito', new CognitoStrategy() as any);
 
   app.use('/authentication', authentication);
+
   app.configure(expressOauth());
 }

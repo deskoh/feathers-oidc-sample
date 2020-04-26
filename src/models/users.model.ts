@@ -8,13 +8,14 @@ export default function (app: Application) {
   const modelName = 'users';
   const mongooseClient = app.get('mongooseClient');
   const schema = new mongooseClient.Schema({
-  
+
     email: { type: String, unique: true, lowercase: true },
     password: { type: String },
-  
-  
-    auth0Id: { type: String },
-  
+
+    // Cognito user attributes
+    cognitoId: { type: String },
+    name: { type: String },
+    group: { type: String },
   }, {
     timestamps: true
   });

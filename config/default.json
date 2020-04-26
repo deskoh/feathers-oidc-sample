@@ -29,10 +29,17 @@
     },
     "oauth": {
       "redirect": "/",
-      "auth0": {
-        "key": "<auth0 oauth key>",
-        "secret": "<auth0 oauth secret>",
-        "subdomain": "<auth0 subdomain>"
+      "cognito": {
+        "oauth": 2,
+        "scope": ["openid"],
+        "scope_delimiter": " ",
+        "key": "<cognito client id>",
+        "secret": "<cognito client secret>",
+        "authorize_url": "https://<cognito userpool domain>/oauth2/authorize",
+        "access_url": "https://<cognito userpool domain>/oauth2/token",
+        "profile_url": "https://<cognito userpool domain>/oauth2/userInfo",
+        "callback": "http://localhost:3030/oauth/cognito/authenticate",
+        "nonce": true
       }
     }
   },
