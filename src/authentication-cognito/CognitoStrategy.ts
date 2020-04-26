@@ -1,4 +1,5 @@
 import { Params } from '@feathersjs/feathers';
+import { OAuthProfile } from '@feathersjs/authentication-oauth';
 
 import Verifier from './Verifier';
 
@@ -37,6 +38,11 @@ export default class CognitoStrategy extends OAuthStrategy {
       ...baseProfile,
     };
   }
+
+  // Uncomment following code to allow dedup local and cognito login.
+  // async getEntityQuery (profile: OAuthProfile, _params: Params) {
+  //   return { email: profile.email };
+  // }
 
   async getEntityData(profile: CognitoProfile) {
     const baseData = await super.getEntityData(profile);
