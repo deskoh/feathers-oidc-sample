@@ -1,5 +1,7 @@
 import { Params } from '@feathersjs/feathers';
 
+import Verifier from './Verifier';
+
 const { OAuthStrategy } = require('@feathersjs/authentication-oauth');
 
 interface CognitoProfile {
@@ -14,10 +16,20 @@ interface CognitoProfile {
   group?: string;
 }
 
-class CognitoStrategy extends OAuthStrategy {
+export default class CognitoStrategy extends OAuthStrategy {
+  private verifier: Verifier;
+
+  constructor(userPoolId: string, region = 'ap-southeast-1') {
+    super();
+    this.verifier = new Verifier(userPoolId, region);
+  }
 
   async getProfile (data: any, params: Params) {
     const baseProfile = await super.getProfile(data, params);
+
+    if (!this.verifier.verifyIdToken(data.id_token.header, data.raw.id_token)) {
+      throw new Error('ID token signature invalid.');
+    }
 
     // Gets the only first group if it exists
     return {
@@ -29,8 +41,6 @@ class CognitoStrategy extends OAuthStrategy {
   async getEntityData(profile: CognitoProfile) {
     const baseData = await super.getEntityData(profile);
 
-    console.log(profile);
-
     return {
       name: profile.name,
       phone: profile.phone_number,
@@ -41,5 +51,3 @@ class CognitoStrategy extends OAuthStrategy {
     };
   }
 }
-
-export default CognitoStrategy;

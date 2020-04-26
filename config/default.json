@@ -39,6 +39,8 @@
         "access_url": "https://<cognito userpool domain>/oauth2/token",
         "profile_url": "https://<cognito userpool domain>/oauth2/userInfo",
         "callback": "http://localhost:3030/oauth/cognito/authenticate",
+        "userPoolId": "<userPoolId>",
+        "region": "ap-southeast-1",
         "nonce": true
       }
     }

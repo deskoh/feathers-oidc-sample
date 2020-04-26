@@ -51,6 +51,8 @@
     "cors": "^2.8.5",
     "feathers-mongoose": "^8.3.0",
     "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.3",
     "mongodb-core": "^3.2.7",
     "mongoose": "^5.9.10",
     "serve-favicon": "^2.5.0",
