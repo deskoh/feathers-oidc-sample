@@ -79,7 +79,7 @@ export default class Verifier {
       }
       const claim = await verifyPromised(token, key.pem) as Claim;
       const currentSeconds = Math.floor( (new Date()).valueOf() / 1000);
-      if (currentSeconds > claim.exp || currentSeconds < claim.auth_time) {
+      if (currentSeconds > claim.exp || Math.abs(currentSeconds - claim.auth_time) > 1) {
         throw new Error('claim is expired or invalid');
       }
       if (claim.iss !== this.cognitoIssuer) {
