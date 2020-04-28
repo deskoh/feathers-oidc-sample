@@ -35,10 +35,8 @@
         "scope_delimiter": " ",
         "key": "<cognito client id>",
         "secret": "<cognito client secret>",
-        "authorize_url": "https://<cognito userpool domain>/oauth2/authorize",
-        "access_url": "https://<cognito userpool domain>/oauth2/token",
-        "profile_url": "https://<cognito userpool domain>/oauth2/userInfo",
         "callback": "http://localhost:3030/oauth/cognito/authenticate",
+        "base_url": "https://<cognito userpool domain>/oauth2",
         "userPoolId": "<userPoolId>",
         "region": "ap-southeast-1",
         "nonce": true

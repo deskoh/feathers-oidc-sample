@@ -1,3 +1,7 @@
 import CognitoStrategy from './CognitoStrategy';
+import updateConfig from './updateConfig';
 
-export { CognitoStrategy };
+export {
+  CognitoStrategy,
+  updateConfig,
+};

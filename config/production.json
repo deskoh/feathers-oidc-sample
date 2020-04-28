@@ -1,4 +1,14 @@
 {
   "host": "feathers-oidc-sample-app.feathersjs.com",
-  "port": "PORT"
+  "port": "PORT",
+  "authentication": {
+    "oauth": {
+      "cognito": {
+        "key": "COGNITO_CLIENT_ID",
+        "secret": "COGNITO_SECRET",
+        "base_url": "COGNITO_BASEURL",
+        "userPoolId": "COGNITO_USER_POOL_ID"
+      }
+    }
+  },
 }
