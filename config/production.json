@@ -3,11 +3,18 @@
   "port": "PORT",
   "authentication": {
     "oauth": {
+      // Defaults to /
+      "redirect": "SUCCESS_REDIRECT",
       "cognito": {
         "key": "COGNITO_CLIENT_ID",
         "secret": "COGNITO_SECRET",
         "base_url": "COGNITO_BASEURL",
-        "userPoolId": "COGNITO_USER_POOL_ID"
+        "userPoolId": "COGNITO_USER_POOL_ID",
+        // Not required if production is using standard HTTP / HTTPS ports
+        // defaults: http(s)://<host>/oauth/<provider>/callback
+        "redirect_uri": "COGNITO_REDIRECT_URI",
+        // defaults: http(s)://<host>/oauth/<provider>/authenticate
+        "callback": "COGNITO_FEATHERS_CALLBACK"
       }
     }
   },
