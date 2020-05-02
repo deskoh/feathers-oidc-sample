@@ -11,13 +11,14 @@ import socketio from '@feathersjs/socketio';
 
 
 import { Application } from './declarations';
-import logger from './logger';
 import middleware from './middleware';
 import services from './services';
 import appHooks from './app.hooks';
 import channels from './channels';
 import authentication from './authentication';
 import mongoose from './mongoose';
+import errorLogger from './errorLogger';
+import suppressErrorDetails from './suppressErrorDetails';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const app: Application = express(feathers());
@@ -50,7 +51,18 @@ app.configure(channels);
 
 // Configure a middleware for 404s and the error handler
 app.use(express.notFound());
-app.use(express.errorHandler({ logger } as any));
+
+// Log error details before suppressed
+app.use(errorLogger());
+// Rempve verbose error message in production mode.
+if (process.env.NODE_ENV !== 'development') {
+  app.use(suppressErrorDetails());
+}
+
+app.use(express.errorHandler({
+  html: false,
+  logger: undefined,
+} as any));
 
 app.hooks(appHooks);
 
